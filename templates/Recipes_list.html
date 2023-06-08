@@ -1,0 +1,12 @@
+<!-- recipe_list.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Recipes</h1>
+    <ul>
+        {% for recipe in recipes %}
+            <li>{{ recipe.title }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
