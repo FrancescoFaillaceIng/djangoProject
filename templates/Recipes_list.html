@@ -6,7 +6,7 @@
     <h1>Recipes</h1>
     <ul>
         {% for recipe in recipes %}
-            <li>{{ recipe.title }}</li>
+            <li><a href="{% url 'recipe-detail' recipe.pk %}">vedi </a>{{ recipe.title }}</li>
         {% endfor %}
     </ul>
 {% endblock %}

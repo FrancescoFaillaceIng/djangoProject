@@ -6,11 +6,7 @@
     <h1>{{ recipe.title }}</h1>
     <p>Author: {{ recipe.author }}</p>
     <p>Description: {{ recipe.description }}</p>
-    <p>Ingredients:</p>
-    <ul>
-        {% for ingredient in recipe.ingredients.all %}
-            <li>{{ ingredient.name }}</li>
-        {% endfor %}
-    </ul>
+    <p>Ingredients: {{ recipe.ingredients }}</p>
+
     <!-- Additional details and styling for the recipe -->
 {% endblock %}
