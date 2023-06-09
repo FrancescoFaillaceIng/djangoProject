@@ -7,7 +7,15 @@
     <!-- Include CSS and JavaScript files here -->
 </head>
 <body>
-    <!-- Include the navigation bar or header here -->
+    <!-- Navigation bar -->
+    <nav>
+        <ul>
+            <li><a href="{% url 'recipes-home' %}">Home</a></li>
+            <li><a href="{% url 'recipe-create' %}">Create Recipe</a></li>
+            <li><a href="{% url 'recipes-list' %}">Look for Recipe</a></li>
+            <!-- Add more navigation links if needed -->
+        </ul>
+    </nav>
 
     <!-- Content block -->
     <div class="content">
