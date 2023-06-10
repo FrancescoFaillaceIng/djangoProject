@@ -1,0 +1,25 @@
+{% block content %}
+    <h1>{{ title }}</h1>
+    {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+        <hr>
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset>
+            <legend>Sign up Here</legend>
+            {{ form.username.label }} {{ form.username }}
+            {{ form.password1.label }} {{ form.password1 }}
+            {{ form.password2.label }} {{ form.password2 }}
+            <button type="submit">Sign up</button>
+            <hr>
+            <a href="{% url "login" %}">You already have an account? Log in here!</a>
+            <br>
+            <a href="{% url "recipes-home" %}">Go back</a>
+        </fieldset>
+    </form>
+{% endblock %}

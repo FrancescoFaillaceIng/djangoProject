@@ -17,6 +17,19 @@
         </ul>
     </nav>
 
+    <nav>
+        <ul>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Log out</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">Log in</a></li>
+            <li><a href="{% url 'register' %}">Sign up</a></li>
+            {% endif %}
+            <!-- Add more navigation links if needed -->
+        </ul>
+    </nav>
+
+
     <!-- Content block -->
     <div class="content">
         {% block content %}
