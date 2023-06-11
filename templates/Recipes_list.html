@@ -3,10 +3,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <style>
+        .recipes {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .recipes ul {
+
+        }
+
+        .recipes ul li {
+            list-style: none;
+        }
+
+        .box {
+            border: 1px double black;
+            margin: 5px;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+    </style>
+
     <h1>Recipes</h1>
-    <ul>
-        {% for recipe in recipes %}
-            <li><a href="{% url 'recipe-detail' recipe.pk %}">vedi </a>{{ recipe.title }}</li>
-        {% endfor %}
-    </ul>
+    <div class="recipes">
+        <ul>
+            {% for recipe in recipes %}
+                <div class="box">
+                    <h2>{{ recipe.title }}</h2>
+                    <li><a href="{% url 'recipe-detail' recipe.pk %}">vedi</a></li>
+                </div>
+
+            {% endfor %}
+        </ul>
+    </div>
+
 {% endblock %}
