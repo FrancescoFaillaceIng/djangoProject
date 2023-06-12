@@ -5,6 +5,7 @@
 {% block content %}
     <a href="{% url 'recipes-list' %}">Back to recipes list</a>
     <h1>{{ recipe.title }}</h1>
+    <img class="recipe_img" src="{{ recipe.image.url }}">
     <p>Author: {{ recipe.author }}</p>
     <p>Description: {{ recipe.description }}</p>
     <p>Ingredients: {{ recipe.ingredients }}</p>
