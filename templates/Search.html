@@ -1,7 +1,33 @@
 {% extends "Base.html" %}
 
 {% block content %}
-    <h1>Home Page</h1>
+    <style>
+        .recipes {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .recipes ul {
+
+        }
+
+        .recipes ul li {
+            list-style: none;
+        }
+
+        .box {
+            border: 1px double black;
+            margin: 20px;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+    </style>
+
     <form method="GET">
         <b>Search by: </b> {{ form.title.label }} {{ form.title }}
         <b>and/or</b> {{ form.category.label }} {{ form.category }}
