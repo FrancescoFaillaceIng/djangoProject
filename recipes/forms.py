@@ -13,3 +13,15 @@ class RecipeForm(ModelForm):
             'ingredients': Textarea(attrs={'class': 'form-control'}),
             'instructions': Textarea(attrs={'class': 'form-control'}),
         }
+
+
+class RecipeSearchForm(ModelForm):
+    class Meta:
+        model = Recipe
+        fields = ['title', 'author', 'category']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['title'].required = False
+        self.fields['author'].required = False
+        self.fields['category'].required = False

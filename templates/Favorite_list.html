@@ -1,0 +1,45 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <style>
+        .recipes {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .recipes ul {
+
+        }
+
+        .recipes ul li {
+            list-style: none;
+        }
+
+        .box {
+            border: 1px double black;
+            margin: 5px;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+    </style>
+
+    <h1>Favorites Recipes</h1>
+    <div class="recipes">
+        <ul>
+            {% for favorite in favorites %}
+                <div class="box">
+                    <h2>{{ favorite.recipe.title }}</h2>
+                    <img class="recipe_img" src="{{ favorite.recipe.image.url }}">
+                    <li><a href="{% url 'recipe-detail' favorite.recipe.pk %}">vedi</a></li>
+                </div>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

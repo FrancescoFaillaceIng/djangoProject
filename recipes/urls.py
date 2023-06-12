@@ -9,6 +9,8 @@ urlpatterns = [
     path('create/', views.RecipeCreateView.as_view(), name="recipe-create"),
     path('list/', views.RecipeListView.as_view(), name="recipes-list"),
     path('detail/<int:pk>/', views.RecipeDetailView.as_view(), name="recipe-detail"),
+    path('favorite/', views.FavoriteListView.as_view(), name="favorite-list"),
+    path('search/', views.SearchListView.as_view(), name="search-list"),
 ]
 
 if settings.DEBUG:

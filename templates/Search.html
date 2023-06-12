@@ -1,0 +1,30 @@
+{% extends "Base.html" %}
+
+{% block content %}
+    <h1>Home Page</h1>
+    <form method="GET">
+        <b>Search by: </b> {{ form.title.label }} {{ form.title }}
+        <b>and/or</b> {{ form.category.label }} {{ form.category }}
+        <b>and/or</b> {{ form.author.label }} {{ form.author }}
+        <button type="submit">Search</button>
+    </form>
+    <hr>
+    {% if form.errors %}
+        {{ form.errors }}
+        <hr>
+    {% endif %}
+    <h1>Recipes</h1>
+    <div class="recipes">
+        <ul>
+            {% for recipe in recipes %}
+                <div class="box">
+                    <h2>{{ recipe.title }}</h2>
+                    <img class="recipe_img" src="{{ recipe.image.url }}">
+                    <li><a href="{% url 'recipe-detail' recipe.pk %}">vedi</a></li>
+                </div>
+
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+```

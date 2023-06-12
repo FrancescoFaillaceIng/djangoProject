@@ -4,6 +4,14 @@
 
 {% block content %}
     <a href="{% url 'recipes-list' %}">Back to recipes list</a>
+    <form method="post">
+        {% csrf_token %}
+        {% if favorite %}
+            <input type="submit" value="Remove">
+        {% else %}
+            <input type="submit" value="Add">
+        {% endif %}
+    </form>
     <h1>{{ recipe.title }}</h1>
     <img class="recipe_img" src="{{ recipe.image.url }}">
     <p>Author: {{ recipe.author }}</p>
