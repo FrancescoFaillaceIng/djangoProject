@@ -36,7 +36,9 @@
             {% for recipe in recipes %}
                 <div class="box">
                     <h2>{{ recipe.title }}</h2>
-                    <img class="recipe_img" src="{{ recipe.image.url }}">
+                    {% if recipe.image %}
+                        <img class="recipe_img" src="{{ recipe.image.url }}">
+                    {% endif %}
                     <li><a href="{% url 'recipe-detail' recipe.pk %}">vedi</a></li>
                 </div>
 

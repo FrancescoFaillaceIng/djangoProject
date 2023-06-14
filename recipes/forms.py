@@ -1,10 +1,10 @@
-from django.forms import ModelForm, Textarea, TextInput
+from django.forms import ModelForm, Textarea, TextInput, FileField
 from .models import Recipe
 
 class RecipeForm(ModelForm):
     class Meta:
         model = Recipe
-        fields = ['title', 'description', 'category', 'ingredients', 'instructions']
+        fields = ['title', 'description', 'category', 'ingredients', 'instructions', 'image']
 
         widgets = {
             'title': TextInput(attrs={'class': 'form-control'}),
@@ -14,6 +14,9 @@ class RecipeForm(ModelForm):
             'instructions': Textarea(attrs={'class': 'form-control'}),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['image'].required = False
 
 class RecipeSearchForm(ModelForm):
     class Meta:

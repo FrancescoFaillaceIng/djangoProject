@@ -35,7 +35,9 @@
             {% for favorite in favorites %}
                 <div class="box">
                     <h2>{{ favorite.recipe.title }}</h2>
-                    <img class="recipe_img" src="{{ favorite.recipe.image.url }}">
+                    {% if favorite.recipe.image %}
+                        <img class="recipe_img" src="{{ favorite.recipe.image.url }}">
+                    {% endif %}
                     <li><a href="{% url 'recipe-detail' favorite.recipe.pk %}">vedi</a></li>
                 </div>
             {% endfor %}
