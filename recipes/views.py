@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from . import models
 from .forms import RecipeForm, RecipeSearchForm
@@ -168,3 +169,8 @@ class RecipeDeleteView(UserPassesTestMixin, DeleteView):
         context = super(RecipeDeleteView, self).get_context_data(**kwargs)
         context['categories'] = models.Category.objects.all()
         return context
+
+    def get_success_url(self):
+        return reverse('recipes-list')
+
+    
