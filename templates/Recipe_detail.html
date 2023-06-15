@@ -4,20 +4,28 @@
 
 {% block content %}
     <a href="{% url 'recipes-list' %}">Back to recipes list</a>
+
+    <h1>{{ recipe.title }}</h1>
+    <img class="recipe_img" src="{{ recipe.image.url }}">
+
     <form method="post">
         {% csrf_token %}
         {% if favorite %}
-            <input type="submit" value="Remove">
+            <p>You don't like it anymore... don't worry you can <input type="submit" value="Remove"> it</p>
         {% else %}
-            <input type="submit" value="Add">
+            <p>You like this? <input type="submit" value="Add"> it to you favorites!</p>
         {% endif %}
     </form>
-    <h1>{{ recipe.title }}</h1>
-    <img class="recipe_img" src="{{ recipe.image.url }}">
-    <p>Author: {{ recipe.author }}</p>
-    <p>Description: {{ recipe.description }}</p>
-    <p>Ingredients: {{ recipe.ingredients }}</p>
-    <p>Instructions: {{ recipe.instructions }}</p>
+
+    <p><span style="font-weight: bold;">Author:</span> {{ recipe.author }}</p>
+    <p><span style="font-weight: bold;">Description:</span> {{ recipe.description }}</p>
+    <p><span style="font-weight: bold;">Ingredients:</span> {{ recipe.ingredients }}</p>
+    <p><span style="font-weight: bold;">Instructions:</span> {{ recipe.instructions }}</p>
+
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
 
     <!-- Additional details and styling for the recipe -->
 {% endblock %}

@@ -12,11 +12,11 @@ class Category(models.Model):
 
 
 class Ingredient(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=2000)
 
 
 class Instruction(models.Model):
-    passage = models.TextField(max_length=1000)
+    passage = models.TextField(max_length=2000)
 
 
 class Image(models.Model):
@@ -27,9 +27,9 @@ class Recipe(models.Model):
     title = models.CharField(max_length=200)
     author = models.ForeignKey(User, on_delete=models.CASCADE, default='', null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    description = models.TextField(max_length=1000)
-    ingredients = models.CharField(max_length=200, default='')
-    instructions = models.CharField(max_length=200, default='')
+    description = models.TextField(max_length=2000)
+    ingredients = models.CharField(max_length=2000, default='')
+    instructions = models.CharField(max_length=2000, default='')
     image = models.ImageField(upload_to='images/', default='')
 
     def __str__(self):
