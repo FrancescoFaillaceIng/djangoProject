@@ -57,6 +57,8 @@ class RecipeDetailView(DetailView):
 
     def post(self, request, *args, **kwargs):
         recipe = models.Recipe.objects.get(id=self.kwargs['pk'])
+        if not request.user.is_authenticated:
+            return redirect('recipe-detail', pk=recipe.id)
         favorite, created = models.Favorite.objects.get_or_create(recipe=recipe, user=request.user)
         if not created:
             favorite.delete()
@@ -65,7 +67,8 @@ class RecipeDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(RecipeDetailView, self).get_context_data(**kwargs)
         recipe = models.Recipe.objects.get(id=self.kwargs['pk'])
-        context['favorite'] = models.Favorite.objects.filter(recipe=recipe, user=self.request.user).exists()
+        if self.request.user.is_authenticated:
+            context['favorite'] = models.Favorite.objects.filter(recipe=recipe, user=self.request.user).exists()
         return context
 
 

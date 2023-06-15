@@ -8,14 +8,16 @@
     <h1>{{ recipe.title }}</h1>
     <img class="recipe_img" src="{{ recipe.image.url }}">
 
-    <form method="post">
-        {% csrf_token %}
-        {% if favorite %}
-            <p>You don't like it anymore... don't worry you can <input type="submit" value="Remove"> it</p>
-        {% else %}
-            <p>You like this? <input type="submit" value="Add"> it to you favorites!</p>
-        {% endif %}
-    </form>
+    {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            {% if favorite %}
+                <p>You don't like it anymore... don't worry you can <input type="submit" value="Remove"> it</p>
+            {% else %}
+                <p>You like this? <input type="submit" value="Add"> it to you favorites!</p>
+            {% endif %}
+        </form>
+    {% endif %}
 
     <p><span style="font-weight: bold;">Author:</span> {{ recipe.author }}</p>
     <p><span style="font-weight: bold;">Description:</span> {{ recipe.description }}</p>
