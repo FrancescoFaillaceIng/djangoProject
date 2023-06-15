@@ -60,6 +60,7 @@
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'recipe-create' %}">Create Recipe</a></li>
                 <li><a href="{% url 'favorite-list' %}">Check your favorites</a></li>
+                <li><a href="{% url 'my-recipes' %}">Check your recipes</a></li>
                 {% endif %}
                 <!-- Add more navigation links if needed -->
             </ul>

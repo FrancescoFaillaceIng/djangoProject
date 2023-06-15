@@ -39,7 +39,7 @@
                     {% if recipe.image %}
                         <img class="recipe_img" src="{{ recipe.image.url }}">
                     {% endif %}
-                    <li><a href="{% url 'recipe-detail' recipe.pk %}">vedi</a></li>
+                    <li><a href="{% url 'recipe-detail' recipe.pk %}">view</a></li>
                 </div>
 
             {% endfor %}

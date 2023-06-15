@@ -1,0 +1,57 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Update your Recipe</h1>
+    {% if form.errors %}
+        {{ form.errors }}
+    {% endif %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Recipe title -->
+        <div class="form-group">
+            <label for="title">Title:</label>
+            {{ form.title }}
+        </div>
+
+        <!-- Recipe category -->
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <select id="category" name="category" class="form-control" required>
+                {% for category in categories %}
+                    <option value="{{ category.id }}"
+                        {% if category.id == recipe.category.id %} selected {% endif %}>
+                        {{ category.type }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Recipe description -->
+        <div class="form-group">
+            <label for="description">Description:</label>
+            {{ form.description }}
+        </div>
+
+        <!-- Recipe ingredients -->
+        <div class="form-group">
+            <label for="ingredients">Ingredients:</label>
+            {{ form.ingredients }}
+        </div>
+
+        <!-- Recipe instructions -->
+        <div class="form-group">
+            <label for="instructions">Instructions:</label>
+            {{ form.instructions }}
+        </div>
+
+        <div class="form-group">
+            <label for="image">Image:</label>
+            {{ form.image }}
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary">Update Recipe</button>
+    </form>
+{% endblock %}

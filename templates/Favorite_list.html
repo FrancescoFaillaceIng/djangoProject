@@ -38,7 +38,7 @@
                     {% if favorite.recipe.image %}
                         <img class="recipe_img" src="{{ favorite.recipe.image.url }}">
                     {% endif %}
-                    <li><a href="{% url 'recipe-detail' favorite.recipe.pk %}">vedi</a></li>
+                    <li><a href="{% url 'recipe-detail' favorite.recipe.pk %}">view</a></li>
                 </div>
             {% endfor %}
         </ul>

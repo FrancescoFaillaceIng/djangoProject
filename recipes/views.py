@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView
 from . import models
 from .forms import RecipeForm, RecipeSearchForm
 
@@ -109,4 +109,36 @@ class SearchListView(ListView):
         return render(request, self.template_name, context)
 
 
+class MyRecipeListView(ListView):
+    model = models.Recipe
+    template_name = 'My_recipe_list.html'
+    context_object_name = 'recipes'
 
+    def get_queryset(self):
+        return models.Recipe.objects.filter(author=self.request.user)
+
+
+class RecipeUpdateView(UpdateView):
+    model = models.Recipe
+    form_class = RecipeForm
+    template_name = 'Recipe_update.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(RecipeUpdateView, self).get_context_data(**kwargs)
+        context['categories'] = models.Category.objects.all()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST, request.FILES, instance=self.get_object())
+
+        if form.is_valid():
+            recipe = form.save(commit=False)
+            recipe.author = User.objects.get(id=request.user.id)
+            recipe.save()
+            return redirect('recipes-list')
+        else:
+            print(form.errors)
+            return render(request, self.template_name, {
+                "form": form,
+                "categories": models.Category.objects.all()
+            })

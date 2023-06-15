@@ -11,6 +11,8 @@ urlpatterns = [
     path('detail/<int:pk>/', views.RecipeDetailView.as_view(), name="recipe-detail"),
     path('favorite/', views.FavoriteListView.as_view(), name="favorite-list"),
     path('search/', views.SearchListView.as_view(), name="search-list"),
+    path('my_recipe/', views.MyRecipeListView.as_view(), name="my-recipes"),
+    path('update/<int:pk>/', views.RecipeUpdateView.as_view(), name="recipe-update"),
 ]
 
 if settings.DEBUG:
