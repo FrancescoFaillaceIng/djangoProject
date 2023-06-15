@@ -1,6 +1,7 @@
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView, ListView, DetailView, UpdateView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from . import models
 from .forms import RecipeForm, RecipeSearchForm
 
@@ -118,15 +119,22 @@ class MyRecipeListView(ListView):
         return models.Recipe.objects.filter(author=self.request.user)
 
 
-class RecipeUpdateView(UpdateView):
+class RecipeUpdateView(UserPassesTestMixin, UpdateView):
     model = models.Recipe
     form_class = RecipeForm
     template_name = 'Recipe_update.html'
+    context_object_name = 'recipe'
 
     def get_context_data(self, **kwargs):
         context = super(RecipeUpdateView, self).get_context_data(**kwargs)
         context['categories'] = models.Category.objects.all()
         return context
+
+    def test_func(self):
+        recipe = self.get_object()
+        if self.request.user == recipe.author:
+            return True
+        return False
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST, request.FILES, instance=self.get_object())
@@ -142,3 +150,21 @@ class RecipeUpdateView(UpdateView):
                 "form": form,
                 "categories": models.Category.objects.all()
             })
+
+
+class RecipeDeleteView(UserPassesTestMixin, DeleteView):
+    model = models.Recipe
+    template_name = 'Recipe_delete.html'
+    success_url = '/recipes/'
+    context_object_name = "recipe"
+
+    def test_func(self):
+        recipe = self.get_object()
+        if self.request.user == recipe.author:
+            return True
+        return False
+
+    def get_context_data(self, **kwargs):
+        context = super(RecipeDeleteView, self).get_context_data(**kwargs)
+        context['categories'] = models.Category.objects.all()
+        return context

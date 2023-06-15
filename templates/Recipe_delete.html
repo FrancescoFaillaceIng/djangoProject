@@ -1,0 +1,12 @@
+
+{% block content %}
+    <h1>Are you sure you want to delete {{ object }}?</h1>
+    <img class="recipe_img" src="{{ recipe.image.url }}">
+    <form method="post">
+        {% csrf_token %}
+        <button style="background-color: red" type="submit" class="btn btn-danger">Yes, I am sure</button>
+        <button type="button" class="btn btn-primary"
+                    onclick="window.location = '{% url "my-recipes" %}'">No, I changed my mind</button>
+    </form>
+{% endblock %}
+
